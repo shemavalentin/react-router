@@ -1,5 +1,5 @@
 
-// Creating the root layout component
+// Creating the root layout component (the global layout)
 
 export default function Root() {
     return (
