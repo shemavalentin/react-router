@@ -6,14 +6,22 @@
 // requesting another documrnt from the server. instead, the app can immediately
 // render new UI. this is done by using <Link> and removing <a href> to <Link to>
 
-import { Link, Outlet, useLoaderData } from "react-router-dom"; // added useLoaderData to access and render data
+import { Link, Outlet, useLoaderData, Form } from "react-router-dom"; // added useLoaderData to access and render data
 
 // URL segments, layouts, and data are more often than not coupled(tripled).
 // because of this natural coupling, React route has data convention to get data into
 // our route components.
 
 // using the API: loader
-import { getContacts} from "../contacts"; 
+import { getContacts, createContact } from "../contacts"; 
+
+// to avoid creating new user using POST method as is sends request through the body
+// let's use GET in form
+
+export async function action() {
+    const contact = await createContact();
+    return { contact };
+}
 
 export async function loader() {
     const contacts = await getContacts();
@@ -51,9 +59,12 @@ export default function Root() {
                             aria-live="polite"
                         ></div>
                     </form>
-                    <form method="post">
+                    {/* <form method="post">
+                        <button type="submit">New</button> */}
+                    <Form method="post">
                         <button type="submit">New</button>
-                    </form>
+
+                    </Form>
                 </div>
 
 

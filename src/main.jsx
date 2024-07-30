@@ -10,7 +10,8 @@ import './index.css';
 import ErrorPage from './error-page';
 import Contact from './routes/contact';
 
-import Root,{loader as rootLoader } from "./routes/root"
+import Root, { loader as rootLoader, action as rootAction } from "./routes/root"  // importing and setting the action on the route
+
 
 
 // Creating the root rout
@@ -22,7 +23,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
 
     // using the loader
-    loader : rootLoader,
+    loader: rootLoader,
+    action: rootAction,
 
     // making the contact route a child of the root route to be displayed into 
     // the root layout frame
