@@ -8,9 +8,11 @@ import {
 import './index.css';
 //import Root from './routes/root';
 import ErrorPage from './error-page';
-import Contact from './routes/contact';
+// import Contact from './routes/contact';
 
 import Root, { loader as rootLoader, action as rootAction } from "./routes/root"  // importing and setting the action on the route
+
+import Contact, { loader as contactLoader} from './routes/contact';
 
 
 
@@ -33,6 +35,7 @@ const router = createBrowserRouter([
       {
         path: "contacts/:contactId",
         element: <Contact />,
+        loader: contactLoader
       }
       // Now after making the components that we need to be displayed as children to the root layout
       // we need also to tell the root layout where to display its children.
@@ -48,3 +51,14 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router} />
   </React.StrictMode>,
 );
+
+
+/* 
+How did the sidebar update? Where did we call the action? where's the code to refetch
+the data? where are useState, onSubmit and useEffect
+
+This is where the "old school web" programming model shows up. As known, <Form>
+prevents the browser from sending the request to the server and sends it to your
+action instead.
+
+*/

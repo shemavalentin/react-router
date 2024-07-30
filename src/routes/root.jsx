@@ -66,8 +66,6 @@ export default function Root() {
 
                     </Form>
                 </div>
-
-
                 <nav>
 
                     {/* displaying data */}
