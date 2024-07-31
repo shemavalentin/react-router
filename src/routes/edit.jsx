@@ -11,7 +11,17 @@ import { updateContact } from "../contacts";
 // Adding an action to the edit module
 export async function action({ request, params }) {
   const formData = await request.formData();
-  const updates = Object.fromEntries(formData);
+
+  // Setting the requests to be sent to actions instead.
+  // const firstName = formData.get("first");
+  // const lastName = formData.get("last")
+
+  const updates = Object.fromEntries(formData);  //
+
+  // Setting the requests to be sent to actions instead.
+  updates.first;  //Some
+  updates.last;  // Name
+
   await updateContact(params.contactId, updates);
   return redirect(`/contacts/${params.contactId}`);
 

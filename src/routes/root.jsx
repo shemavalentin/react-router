@@ -6,7 +6,7 @@
 // requesting another documrnt from the server. instead, the app can immediately
 // render new UI. this is done by using <Link> and removing <a href> to <Link to>
 
-import { Link, Outlet, useLoaderData, Form } from "react-router-dom"; // added useLoaderData to access and render data
+import { Link, Outlet, useLoaderData, Form, redirect, } from "react-router-dom"; // added useLoaderData to access and render data
 
 // URL segments, layouts, and data are more often than not coupled(tripled).
 // because of this natural coupling, React route has data convention to get data into
@@ -20,7 +20,7 @@ import { getContacts, createContact } from "../contacts";
 
 export async function action() {
     const contact = await createContact();
-    return { contact };
+    return redirect(`/contacts/${ contact.id }/edit`);
 }
 
 export async function loader() {
