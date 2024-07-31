@@ -1,5 +1,23 @@
 
-import { Form, useLoaderData } from "react-router-dom";
+import {
+  Form,
+  useLoaderData,
+  redirect  // used to wire up the form displayed when edit btn is clicked to the action  
+} from "react-router-dom";
+
+import { updateContact } from "../contacts";
+
+
+// Adding an action to the edit module
+export async function action({ request, params }) {
+  const formData = await request.formData();
+  const updates = Object.fromEntries(formData);
+  await updateContact(params.contactId, updates);
+  return redirect(`/contacts/${params.contactId}`);
+
+}
+
+
 
 export default function EditContact() {
   const { contact } = useLoaderData();

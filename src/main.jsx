@@ -14,8 +14,7 @@ import Root, { loader as rootLoader, action as rootAction } from "./routes/root"
 
 import Contact, { loader as contactLoader } from './routes/contact';
 
-import EditContact from './routes/edit';
-
+import EditContact, { action as editAction } from './routes/edit';  // imported action as editAction to wire the action up to the route
 
 
 // Creating the root rout
@@ -47,6 +46,7 @@ const router = createBrowserRouter([
         path: "contacts/:contactId/edit",
         element: < EditContact />,
         loader: contactLoader,
+        action: editAction,
       }
     ]   
   },
