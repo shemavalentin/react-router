@@ -7,6 +7,9 @@ import { deleteContact } from "../contacts";
 // seting an action
 
 export async function action({ params }) {
+    if (!params) {
+        throw new Error("oh something went wrong")
+    }
     await deleteContact(params.contactId);
     return redirect("/")
 }
