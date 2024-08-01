@@ -6,7 +6,7 @@
 // requesting another documrnt from the server. instead, the app can immediately
 // render new UI. this is done by using <Link> and removing <a href> to <Link to>
 
-import { Link, Outlet, useLoaderData, Form, redirect, } from "react-router-dom"; // added useLoaderData to access and render data
+import { Outlet, useLoaderData, Form, redirect, NavLink } from "react-router-dom"; // added useLoaderData to access and render data
 
 // URL segments, layouts, and data are more often than not coupled(tripled).
 // because of this natural coupling, React route has data convention to get data into
@@ -30,7 +30,7 @@ export async function loader() {
     // after this let's configure the loader on route in the main.js
 }
 
-export default function Root() {
+export default function Root() { 
 
     // Accessing data 
     const { contacts } = useLoaderData();
@@ -73,8 +73,9 @@ export default function Root() {
                     {contacts.length ? (
                         <ul>
                             {contacts.map((contact) => (
-                            <li key={contact.id}>
-                                <Link to={`contacts/${contact.id}`}>
+                                <li key={contact.id}>
+                                    
+                                {/* <Link to={`contacts/${contact.id}`}>
                                 {contact.first || contact.last ? (
                                     <>
                                     {contact.first} {contact.last}
@@ -83,7 +84,27 @@ export default function Root() {
                                     <i>No Name</i>
                                 )} {" "}
                                 {contact.favorite && <span>★</span>}
-                                </Link>
+                                </Link> */}
+                                    
+                                    {/* Using the NavLink to know which record we are on in the sidebar */}
+                                    <NavLink
+                                        to={`contacts/${contact.id}`}
+                                        className={({ isActive, isPending }) =>
+                                            isActive ? "active" : isPending
+                                            ? "pending" : " "
+                                        } 
+                                        
+                                    >
+
+                                        {contact.first || contact.last ? (
+                                    <>
+                                    {contact.first} {contact.last}
+                                    </>
+                                ) : (
+                                    <i>No Name</i>
+                                )} {" "}
+                                {contact.favorite && <span>★</span>}
+                                    </NavLink>
                             </li>
                             ))}
                         </ul>
