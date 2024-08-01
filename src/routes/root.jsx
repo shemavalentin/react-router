@@ -6,7 +6,7 @@
 // requesting another documrnt from the server. instead, the app can immediately
 // render new UI. this is done by using <Link> and removing <a href> to <Link to>
 
-import { Outlet, useLoaderData, Form, redirect, NavLink } from "react-router-dom"; // added useLoaderData to access and render data
+import { Outlet, useLoaderData, Form, redirect, NavLink, useNavigation } from "react-router-dom"; // added useLoaderData to access and render data
 
 // URL segments, layouts, and data are more often than not coupled(tripled).
 // because of this natural coupling, React route has data convention to get data into
@@ -34,6 +34,7 @@ export default function Root() {
 
     // Accessing data 
     const { contacts } = useLoaderData();
+    const navigation = useNavigation();
     return (
         <>
             <div id="sidebar">
@@ -127,8 +128,21 @@ export default function Root() {
                     {/* </ul> */}
                 </nav>
             </div>
+
+            <div id="detail"
+                
+           /* used the hook useNavigation to return the current navigation state
+           It can be one of 'idle' | "submitting". It was added to avoid the little 
+           unresponsiveness that was happening. the CSS here will show the fade after a 
+           short delay
+           */
+        
+            className = {
+                navigation.state === 'loading' ? 'loading': " "
+            }
+            >
+                
             {/* adding <Outlet> in the div to tell the root layout where to display its child */}
-            <div id="detail">
                 <Outlet/>
             </div>
         </>
