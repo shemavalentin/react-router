@@ -1,7 +1,7 @@
 
 import {
   Form,
-  useLoaderData,
+  useLoaderData, // used to reload data after an action may be delete action or other.
   redirect  // used to wire up the form displayed when edit btn is clicked to the action  
 } from "react-router-dom";
 

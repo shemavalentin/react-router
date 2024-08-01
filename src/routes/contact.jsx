@@ -63,7 +63,7 @@ export default function Contact() {
           </Form>
           <Form
             method="post"
-            action="destroy"
+            action="destroy"   // this action will help us to delete record
             onSubmit={(event) => {
               if (
                 !window.confirm(

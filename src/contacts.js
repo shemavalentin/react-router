@@ -41,9 +41,12 @@ export async function updateContact(id, updates) {
 
 export async function deleteContact(id) {
   let contacts = await localforage.getItem("contacts");
-  let index = contacts.findIndex((contact) => contact.id === id);
+  let index = contacts.findIndex((contact) => contact.id === id); // findIndex
+  // returns the index of the first element in an array that satisfies the provided
+  // testing function. here when the id of the function is equal to id in the array
+  // then show the index. contrally the find method returns
   if (index > -1) {
-    contacts.splice(index, 1);
+    contacts.splice(index, 1); // at this index, remove 1 element. splice can also replace
     await set(contacts);
     return true;
   }

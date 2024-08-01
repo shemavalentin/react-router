@@ -16,6 +16,8 @@ import Contact, { loader as contactLoader } from './routes/contact';
 
 import EditContact, { action as editAction } from './routes/edit';  // imported action as editAction to wire the action up to the route
 
+// Adding the destroy route to the route config
+import { action as destroyAction } from './routes/destroy';
 
 // Creating the root rout
 const router = createBrowserRouter([
@@ -47,6 +49,11 @@ const router = createBrowserRouter([
         element: < EditContact />,
         loader: contactLoader,
         action: editAction,
+      },
+
+      {
+        path: "contacts/:contactId/destroy",
+        action: destroyAction,
       }
     ]   
   },
