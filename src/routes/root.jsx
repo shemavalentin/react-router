@@ -32,7 +32,9 @@ export async function loader({request}) {
     const url = new URL(request.url)
     const q = url.searchParams.get('q');
     const contacts = await getContacts(q);
-    return { contacts };
+
+    // returning the q from the loader and setting it as the search field default value
+    return { contacts,q };
 
     // after this let's configure the loader on route in the main.js
 }
@@ -40,7 +42,7 @@ export async function loader({request}) {
 export default function Root() { 
 
     // Accessing data 
-    const { contacts } = useLoaderData();
+    const { contacts,q } = useLoaderData();
     const navigation = useNavigation();
     return (
         <>
@@ -54,6 +56,8 @@ export default function Root() {
                             placeholder="Search"
                             type="search"
                             name="q"
+                            // Setting the q as the default value
+                            defaultValue={q}
                         />
 
                         <div
