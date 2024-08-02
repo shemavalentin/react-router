@@ -23,8 +23,15 @@ export async function action() {
     return redirect(`/contacts/${ contact.id }/edit`);
 }
 
-export async function loader() {
-    const contacts = await getContacts();
+export async function loader({request}) {
+    // filtering the list if there are URLSearchParams. 
+    // And adding them here has a reason:  Because this is a GET, not a POST, React Router does not call the action. Submitting a GET form is the same as clicking a link: only the URL changes. That's why the code we added for filtering is in the loader, not the action of this route.
+
+// This also means it's a normal page navigation. You can click the back button to get back to where you were.
+    
+    const url = new URL(request.url)
+    const q = url.searchParams.get('q');
+    const contacts = await getContacts(q);
     return { contacts };
 
     // after this let's configure the loader on route in the main.js
@@ -40,7 +47,7 @@ export default function Root() {
             <div id="sidebar">
                 <h1>React Routes Application </h1>
                 <div>
-                    <form id="search-form" role="search">
+                    <Form id="search-form" role="search">
                         <input
                             id="q"
                             aria-label="Search contacts"
@@ -59,7 +66,7 @@ export default function Root() {
                             className=" sr-only"
                             aria-live="polite"
                         ></div>
-                    </form>
+                    </Form>
                     {/* <form method="post">
                         <button type="submit">New</button> */}
                     <Form method="post">
