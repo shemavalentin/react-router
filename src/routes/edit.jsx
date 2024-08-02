@@ -2,7 +2,8 @@
 import {
   Form,
   useLoaderData, // used to reload data after an action may be delete action or other.
-  redirect  // used to wire up the form displayed when edit btn is clicked to the action  
+  redirect,  // used to wire up the form displayed when edit btn is clicked to the action  
+  useNavigate  // added to be able to use the cancel button and navigate to the other page we wil redirect to.
 } from "react-router-dom";
 
 import { updateContact } from "../contacts";
@@ -31,6 +32,7 @@ export async function action({ request, params }) {
 
 export default function EditContact() {
   const { contact } = useLoaderData();
+  const navigate = useNavigate();
 
   return (
     <Form method="post" id="contact-form">
@@ -80,7 +82,14 @@ export default function EditContact() {
       </label>
       <p>
         <button type="submit">Save</button>
-        <button type="button">Cancel</button>
+        <button
+          type="button"    // Here we are not using the preventDefault because the type of the button is button and it is the html's way to prevent to submit defaults.
+          onClick={() => {
+            navigate(-1)
+          }}
+        >
+          Cancel
+        </button>
       </p>
     </Form>
   );

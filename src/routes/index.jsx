@@ -12,8 +12,8 @@ index routes as the default child route to fill in that space.
 export default function Index() {
     return (
         <p id=" zero-state">
-            <strong> <h2> Welcome to our Universe Cutting-edge
-            Web Dev Technologies</h2></strong>
+            <strong> Welcome to our Universe Cutting-edge
+            Web Dev Technologies</strong>
             <br />
             Check out {" "}
 
