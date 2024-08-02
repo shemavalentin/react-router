@@ -1,6 +1,7 @@
 
 // Creating the root layout component (the global layout)
 
+import { useEffect } from "react";
 
 // importing Link for Cloud side routing to allow us to update the URL without
 // requesting another documrnt from the server. instead, the app can immediately
@@ -42,8 +43,15 @@ export async function loader({request}) {
 export default function Root() { 
 
     // Accessing data 
-    const { contacts,q } = useLoaderData();
+    const { contacts, q } = useLoaderData();
+    
     const navigation = useNavigation();
+
+    // Synchronizing input value with the URL search param. We can bring in useEffect from React to manipulate the form's state in the DOM directly.
+    useEffect(() => {
+        document.getElementById('q').value = q;
+    }, [q]);
+
     return (
         <>
             <div id="sidebar">
