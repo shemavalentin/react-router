@@ -12,12 +12,13 @@ index routes as the default child route to fill in that space.
 export default function Index() {
     return (
         <p id=" zero-state">
-            This is to test route index.
+            <strong> <h2> Welcome to our Universe Cutting-edge
+            Web Dev Technologies</h2></strong>
             <br />
-            Check out{" "}
+            Check out {" "}
 
-            <a href="https: //reactrouter.com">
-                the docs at reactrouter.com
+            <a href="https://catetecblog.netlify.app/">
+                our portfolio at catetecblog.netlify.app
             </a>
             .
         </p>
