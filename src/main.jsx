@@ -12,7 +12,7 @@ import ErrorPage from './error-page';
 
 import Root, { loader as rootLoader, action as rootAction } from "./routes/root"  // importing and setting the action on the route
 
-import Contact, { loader as contactLoader } from './routes/contact';
+import Contact, { loader as contactLoader, action as contactAction } from './routes/contact';
 
 import EditContact, { action as editAction } from './routes/edit';  // imported action as editAction to wire the action up to the route
 
@@ -45,7 +45,8 @@ const router = createBrowserRouter([
       { 
         path: "contacts/:contactId",
         element: <Contact />,
-        loader: contactLoader
+        loader: contactLoader,
+        action: contactAction,
       },
       // Now after making the components that we need to be displayed as children to the root layout
       // we need also to tell the root layout where to display its children.
