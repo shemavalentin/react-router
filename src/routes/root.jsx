@@ -7,7 +7,7 @@ import { useEffect } from "react";
 // requesting another documrnt from the server. instead, the app can immediately
 // render new UI. this is done by using <Link> and removing <a href> to <Link to>
 
-import { Outlet, useLoaderData, Form, redirect, NavLink, useNavigation } from "react-router-dom"; // added useLoaderData to access and render data
+import { Outlet, useLoaderData, Form, redirect, NavLink, useNavigation, useSubmit } from "react-router-dom"; // added useLoaderData to access and render data
 
 // URL segments, layouts, and data are more often than not coupled(tripled).
 // because of this natural coupling, React route has data convention to get data into
@@ -46,6 +46,10 @@ export default function Root() {
     const { contacts, q } = useLoaderData();
     
     const navigation = useNavigation();
+    // The useSubmit is the cousin to useNavigation that helps to search by keystroke without
+    // submitting the form first hitting Enter key for form submission. the form 
+    // is automatically submitted.
+    const submit = useSubmit();
 
     // Synchronizing input value with the URL search param. We can bring in useEffect from React to manipulate the form's state in the DOM directly.
     useEffect(() => {
@@ -66,6 +70,11 @@ export default function Root() {
                             name="q"
                             // Setting the q as the default value
                             defaultValue={q}
+
+                            // Adding an event handler to handle the search input so that as we type the form is submitted automatically
+                            onChange={(event) => {
+                                submit(event.currentTarget.form)
+                            }}
                         />
 
                         <div
