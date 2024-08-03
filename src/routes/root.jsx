@@ -81,7 +81,11 @@ export default function Root() {
 
                             // Adding an event handler to handle the search input so that as we type the form is submitted automatically
                             onChange={(event) => {
-                                submit(event.currentTarget.form)
+                                // Unstacking the history stack when back button is clicked
+                                const isFirstSearch = q == null; 
+                                submit(event.currentTarget.form, {
+                                    replace: !isFirstSearch    // Deciding to replace the search
+                                })
                             }}
                         />
 
