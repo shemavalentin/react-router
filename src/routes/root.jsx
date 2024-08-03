@@ -49,7 +49,14 @@ export default function Root() {
     // The useSubmit is the cousin to useNavigation that helps to search by keystroke without
     // submitting the form first hitting Enter key for form submission. the form 
     // is automatically submitted.
+    
     const submit = useSubmit();
+
+
+    // Adding a Search spinner. here I will use the useNavigation hook to fake the
+    // network as it could be data comming from the database.
+    
+    const searching = navigation.location && new URLSearchParams(navigation.location.search).has("q");
 
     // Synchronizing input value with the URL search param. We can bring in useEffect from React to manipulate the form's state in the DOM directly.
     useEffect(() => {
@@ -68,6 +75,7 @@ export default function Root() {
                             placeholder="Search"
                             type="search"
                             name="q"
+                            className={searching ? "Loading" : " "} // showing loading when no data yet
                             // Setting the q as the default value
                             defaultValue={q}
 
@@ -80,7 +88,7 @@ export default function Root() {
                         <div
                             id="search-spinner"
                             aria-hidden
-                            hidden={true}
+                            hidden={!searching}  // Hide the spinner no searching 
                         />
 
                         <div
