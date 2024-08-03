@@ -3,6 +3,16 @@ import { getContact, updateContact } from "../contacts";
 
 export async function loader({ params }) {
   const contact = await getContact(params.contactId);
+  // Throwing a 404 response in the loader, when the user we are looking for doesn't exist
+  // this will prevent us not breacking the call stack
+  // now .......
+  
+  if (!contact) {
+    throw new Response("", {
+      status: 404,
+      statusText: " Not Found ",
+    })
+  }
   return { contact };
 }
 

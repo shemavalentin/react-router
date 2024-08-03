@@ -33,10 +33,13 @@ const router = createBrowserRouter([
     loader: rootLoader,
     action: rootAction,
 
-    // making the contact route a child of the root route to be displayed into 
-    // the root layout frame
+    children: [     // this is added to  Wrap the child routes in a pathless route
+      {
+        errorElement: <ErrorPage />,   // with this error page that will display when a contact that's not exist is requested in URL
+        // making the contact route a child of the root route to be displayed into 
+      // the root layout frame
 
-    children: [  
+        children: [  
       {
         index: true,
         element: <Index />
@@ -63,6 +66,9 @@ const router = createBrowserRouter([
         path: "contacts/:contactId/destroy",
         action: destroyAction,
         errorElement: <div> Oops! There was an error.</div>,
+      }
+    ]
+        
       }
     ]   
   },
