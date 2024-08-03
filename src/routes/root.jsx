@@ -66,7 +66,7 @@ export default function Root() {
     return (
         <>
             <div id="sidebar">
-                <h1>React Routes Application </h1>
+                <h1>React Routes UI/UX Optimization</h1>
                 <div>
                     <Form id="search-form" role="search">
                         <input
