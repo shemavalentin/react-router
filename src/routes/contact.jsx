@@ -104,7 +104,12 @@ export default function Contact() {
 function Favorite({ contact }) {
   //using the useFetcher to communicate to loaders to enable edit without changing the page.
   const fetcher = useFetcher();
-  const favorite = contact.favorite;
+  //const favorite = contact.favorite;
+  // Using Optimistic UI to update the favorite(star) state with the network latency
+
+  const favorite = fetcher.formData ? fetcher.formData.get("favorite")
+    === " true" : contact.favorite;
+
   return (
     // returning the same page we are on by wrapping the in fetcher.com
     <fetcher.Form method = "post">
